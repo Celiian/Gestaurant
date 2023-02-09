@@ -1,7 +1,6 @@
 package com.example.gestaurant;
 
-import com.example.gestaurant.db.mongodb;
-import com.mongodb.client.MongoDatabase;
+import com.example.gestaurant.db.MongoDb;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,12 +11,12 @@ import java.io.IOException;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
+        MongoDb.initiateDb();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("home.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
-        stage.setTitle("Hello!");
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("Gestaurant.exe");
         stage.setScene(scene);
         stage.show();
-        mongodb.initiateDb();
     }
 
     public static void main(String[] args) {

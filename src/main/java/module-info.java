@@ -10,4 +10,6 @@ module com.example.gestaurant {
 
     opens com.example.gestaurant.db to javafx.fxml;
     exports com.example.gestaurant.db;
+    exports com.example.gestaurant.controller;
+    opens com.example.gestaurant.controller to javafx.fxml;
 }
