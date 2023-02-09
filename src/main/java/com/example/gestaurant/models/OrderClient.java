@@ -4,7 +4,7 @@ public class OrderClient {
 
     public static int table;
 
-    public static String name;
+    public static String name = "";
 
 
     public static int getTable() {

@@ -1,6 +1,7 @@
 package com.example.gestaurant.controller.client;
 
 import com.example.gestaurant.db.TableDb;
+import com.example.gestaurant.models.Order;
 import com.example.gestaurant.models.OrderClient;
 import com.example.gestaurant.models.Table;
 import javafx.fxml.FXML;
@@ -28,6 +29,10 @@ public class TableController implements Initializable {
     @FXML
     private Label errorLabel;
 
+    @FXML
+    private Label labelReserved;
+
+
     private static List<Table> tableList = new ArrayList<>();
 
     @Override
@@ -49,7 +54,6 @@ public class TableController implements Initializable {
         });
     }
 
-
     public void searchTable(){
 
         if (fieldNumberCustomer.getText() != null || fieldNameCustomer.getText() != null){
@@ -64,6 +68,8 @@ public class TableController implements Initializable {
                         .sorted(Comparator.comparing(Table::getSize)).toList();
                 OrderClient.setTable(tableList.get(0).getNumber());
                 OrderClient.setName(fieldNameCustomer.getText());
+
+                labelReserved.setText("Vous avez réservé la table " + OrderClient.getTable());
             }
             catch (Exception e)
             {
