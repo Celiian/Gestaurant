@@ -1,5 +1,6 @@
 package com.example.gestaurant;
 
+import com.example.gestaurant.db.DishDb;
 import com.example.gestaurant.db.MongoDb;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
