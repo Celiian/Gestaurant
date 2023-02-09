@@ -29,17 +29,22 @@ public class MenuController implements Initializable {
             float price = (float) variable / 100;
             ArrayList<String> ingredientList = (ArrayList<String>) dish.get("ingredients");
             String ingredients = ingredientList.stream().map(Object::toString).collect(Collectors.joining(", "));
-            System.out.println(dish.get("status"));
-            if (!Objects.equals((String) dish.get("status"), "out of stock") && !Objects.equals((String) dish.get("status"), "coming soon")) {
+            if (!Objects.equals(dish.get("status"), "out of stock") && !Objects.equals(dish.get("status"), "coming soon")) {
                 HBox hbox = new HBox(50);
                 hbox.getChildren().addAll(
                         new Label((String) dish.get("name")),
                         new Label(ingredients),
                         new Label("Prix : " + price + "€")
                 );
-                menuBox.getChildren().addAll(
-                        hbox
-                );
+                try {
+                    menuBox.getChildren().addAll(
+                            hbox
+                    );
+                }
+                catch (Exception e){
+                    System.out.println(e);
+                }
+
             }
 
         });

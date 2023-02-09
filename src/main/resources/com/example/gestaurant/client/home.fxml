@@ -52,6 +52,11 @@
                         <fx:include source="menu.fxml" />
                      </children>
                   </VBox>
+                  <VBox fx:id="tablePage" prefHeight="600.0" prefWidth="720.0">
+                     <children>
+                        <fx:include source="table.fxml" />
+                     </children>
+                  </VBox>
                </children></VBox>
             <AnchorPane prefHeight="598.0" prefWidth="169.0" SplitPane.resizableWithParent="false">
                <children>
@@ -63,9 +68,9 @@
                         <Color red="0.624" green="0.624" blue="0.624" fx:id="x2" />
                      </textFill>
                   </Label>
-                  <Button fx:id="boutonBibliotheque" layoutX="41.0" layoutY="70.0" mnemonicParsing="false" onAction="#dishPage" text="Voir notre menu" />
-                  <Button fx:id="boutonConversions" layoutX="39.0" layoutY="124.0" mnemonicParsing="false" text="Choisir une table" />
-                  <Button fx:id="boutonArmee" layoutX="63.0" layoutY="192.0" mnemonicParsing="false" text="Quitter" />
+                  <Button layoutX="41.0" layoutY="70.0" mnemonicParsing="false" onAction="#dishPage" text="Voir notre menu" />
+                  <Button layoutX="39.0" layoutY="124.0" mnemonicParsing="false" onAction="#tablePage" text="Choisir une table" />
+                  <Button layoutX="63.0" layoutY="192.0" mnemonicParsing="false" text="Quitter" />
                   <Line endX="120.0" layoutX="55.0" layoutY="273.0" startX="-60.0" />
                   <Label alignment="CENTER" layoutX="54.0" layoutY="288.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Contact" textAlignment="CENTER" wrapText="false">
                      <font>

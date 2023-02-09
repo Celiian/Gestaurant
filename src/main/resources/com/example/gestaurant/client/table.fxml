@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="600.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestaurant.controller.client.TableController">
+   <children>
+      <SplitPane focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+         <items>
+            <ScrollPane prefHeight="-1.0" prefWidth="-1.0">
+               <content>
+                  <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="599.0" prefWidth="530.0">
+                     <children>
+                        <Label layoutX="300.0" layoutY="71.0" prefWidth="33.0" text="Label" />
+                        <ChoiceBox fx:id="emplacementChoice" layoutX="366.0" layoutY="68.0" prefWidth="150.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </ScrollPane>
+         </items>
+      </SplitPane>
+   </children>
+</VBox>
