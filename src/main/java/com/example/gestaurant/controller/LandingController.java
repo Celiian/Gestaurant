@@ -4,37 +4,35 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class HomeController implements Initializable {
+public class LandingController implements Initializable {
 
     @FXML
     private VBox globalBox;
 
     @FXML
-    private AnchorPane boxHome;
+    private VBox landingBox;
+
 
     @FXML
-    private AnchorPane boxDishes;
+    private VBox customerBox;
 
-    @FXML
-    private Button customerDoor;
-
-    @FXML
-    private Button staffDoor;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        globalBox.getChildren().removeAll(boxDishes);
+        globalBox.getChildren().removeAll(customerBox);
+
     }
 
     public void customerPage(){
-        globalBox.getChildren().removeAll(boxHome);
-        globalBox.getChildren().addAll(boxDishes);
+        globalBox.getChildren().removeAll(landingBox);
+        globalBox.getChildren().addAll(customerBox);
     }
 
 
