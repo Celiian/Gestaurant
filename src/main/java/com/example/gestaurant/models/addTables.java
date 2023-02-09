@@ -1,7 +1,6 @@
-package com.example.gestaurant.db;
+package com.example.gestaurant.models;
 
 import com.example.gestaurant.db.MongoDb;
-import com.example.gestaurant.models.tables;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
