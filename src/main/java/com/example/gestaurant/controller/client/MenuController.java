@@ -1,6 +1,8 @@
 package com.example.gestaurant.controller.client;
 
 import com.example.gestaurant.db.DishDb;
+import com.example.gestaurant.models.Order;
+import com.example.gestaurant.models.OrderClient;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -48,5 +50,9 @@ public class MenuController implements Initializable {
             }
 
         });
+    }
+    public void test(){
+        System.out.println(OrderClient.getTable());
+        System.out.println(OrderClient.getName());
     }
 }
