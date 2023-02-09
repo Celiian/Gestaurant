@@ -16,7 +16,7 @@ import java.util.Properties;
 
 public class MongoDb {
     public static MongoDatabase database;
-    private static String url;
+    public static String url;
 
     public static void initiateDb() {
         try (InputStream input = new FileInputStream(".properties")) {
@@ -30,17 +30,4 @@ public class MongoDb {
         }
     }
 
-    public static String getOrders() {
-        try (MongoClient mongoClient = MongoClients.create(url)) {
-            database = mongoClient.getDatabase("gestaurant");
-            MongoCollection<Document> collection = database.getCollection("Orders");
-
-            Document doc = collection.find().first();
-            if (doc != null) {
-                return doc.toJson();
-            } else {
-                return "No orders.";
-            }
-        }
-    }
 }

@@ -1,10 +1,7 @@
-package com.example.gestaurant.controller.Client;
+package com.example.gestaurant.controller.client;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.MenuBar;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
@@ -16,17 +13,17 @@ public class HomeController implements Initializable {
     private VBox boxGlobalClient;
 
     @FXML
-    private VBox boxDishes;
+    private VBox menuPage;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        boxGlobalClient.getChildren().removeAll(boxDishes);
+        boxGlobalClient.getChildren().removeAll(menuPage);
 
     }
 
     public void dishPage(){
-        boxGlobalClient.getChildren().addAll(boxDishes);
+        boxGlobalClient.getChildren().addAll(menuPage);
     }
 
 
