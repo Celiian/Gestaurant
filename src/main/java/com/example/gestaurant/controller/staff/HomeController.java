@@ -20,6 +20,8 @@ public class HomeController implements Initializable {
     @FXML
     private VBox financePage;
 
+    @FXML
+    private VBox employeePage;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -43,8 +45,16 @@ public class HomeController implements Initializable {
 
     }
 
+    public void employeePage(){
+        clear();
+        boxGlobalStaff.getChildren().add(employeePage);
+
+    }
+
+
 
     public void clear(){
+        boxGlobalStaff.getChildren().remove(employeePage);
         boxGlobalStaff.getChildren().remove(financePage);
         boxGlobalStaff.getChildren().remove(orderPage);
     }

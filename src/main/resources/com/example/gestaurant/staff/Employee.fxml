@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestaurant.controller.staff.EmployeeController">
+   <children>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="602.0" prefWidth="902.0" style="-fx-background-color: #747475;">
+         <children>
+            <ScrollPane layoutX="469.0" layoutY="12.0" prefHeight="574.0" prefWidth="402.0">
+               <content>
+                  <VBox fx:id="employeeCard" maxHeight="1.7976931348623157E308" prefHeight="570.0" prefWidth="400.0" />
+               </content>
+            </ScrollPane>
+            <AnchorPane layoutX="8.0" layoutY="-5.0" prefHeight="570.0" prefWidth="438.0">
+               <children>
+                  <TextField fx:id="fieldName" layoutX="144.0" layoutY="78.0" />
+                  <Label layoutX="92.0" layoutY="82.0" prefHeight="18.0" prefWidth="38.0" text="Nom" textFill="WHITE" />
+                  <TextField fx:id="fieldJob" layoutX="144.0" layoutY="176.0" />
+                  <Label layoutX="84.0" layoutY="179.0" prefHeight="18.0" prefWidth="38.0" text="Poste" textFill="WHITE" />
+                  <TextField fx:id="fieldPhoneNumber" layoutX="144.0" layoutY="225.0" />
+                  <Label layoutX="58.0" layoutY="229.0" prefHeight="18.0" prefWidth="61.0" text="Téléphone" textFill="WHITE" />
+                  <TextField fx:id="fieldFirstName" layoutX="144.0" layoutY="125.0" />
+                  <Label layoutX="76.0" layoutY="129.0" prefHeight="18.0" prefWidth="45.0" text="Prénom" textFill="WHITE" />
+                  <Button layoutX="196.0" layoutY="307.0" mnemonicParsing="false" onAction="#addEmployee" text="Valider" />
+                  <Label layoutX="141.0" layoutY="36.0" prefHeight="18.0" prefWidth="157.0" text="Ajout d'un nouvel employé" textFill="WHITE" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>
