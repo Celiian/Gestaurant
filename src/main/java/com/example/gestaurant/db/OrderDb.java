@@ -1,6 +1,7 @@
 package com.example.gestaurant.db;
 
 import com.example.gestaurant.models.Order;
+import com.mongodb.BasicDBObject;
 import com.mongodb.client.*;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.result.UpdateResult;
@@ -83,6 +84,29 @@ public class OrderDb {
             MongoDb.database = mongoClient.getDatabase("gestaurant");
             MongoDb.database.getCollection("Orders").deleteOne(new Document()
                     .append("_id", new ObjectId(id)));
+        }
+    }
+    public static List<String> getOrdersById(ArrayList<String> ordersId) {
+        try (MongoClient mongoClient = MongoClients.create(MongoDb.url)) {
+            MongoDb.database = mongoClient.getDatabase("gestaurant");
+            MongoCollection<Document> collectionOrders = MongoDb.database.getCollection("orders");
+
+            ArrayList<ObjectId> ordersObjectId = new ArrayList<>();
+            ordersId.stream().forEach(order -> {
+                ordersObjectId.add(new ObjectId(order));
+            });
+
+
+            BasicDBObject inQuery = new BasicDBObject();
+            inQuery.put("_id", new BasicDBObject("$in", ordersObjectId));
+            FindIterable<Document> ordersDoc = collectionOrders.find(inQuery);
+
+            List<String> orders = new ArrayList<>();
+            for (Document collectionOrder : ordersDoc) {
+                orders.add(collectionOrder.toJson());
+            }
+
+            return orders;
         }
     }
 }

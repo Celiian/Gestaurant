@@ -5,6 +5,9 @@ module com.example.gestaurant {
     requires org.mongodb.bson;
     requires org.mongodb.driver.sync.client;
     requires java.desktop;
+    requires kernel;
+    requires layout;
+    requires io;
 
     opens com.example.gestaurant to javafx.fxml;
     exports com.example.gestaurant;

@@ -1,9 +1,7 @@
 package com.example.gestaurant.models;
 
 
-import org.bson.Document;
-
-public class Table {
+public class TableGestaurant {
     private int number;
     private String picture;
     private int size;
@@ -11,7 +9,7 @@ public class Table {
     private String customer;
     private String id;
 
-    public Table(int number, String picture, int size, String location, String id, String customer) {
+    public TableGestaurant(int number, String picture, int size, String location, String id, String customer) {
 
         this.number = number;
         this.picture = picture;

@@ -1,5 +1,6 @@
 package com.example.gestaurant.controller.staff;
 
+import com.example.gestaurant.db.DishDb;
 import com.example.gestaurant.db.OrderDb;
 import com.example.gestaurant.db.StatusDb;
 import com.example.gestaurant.db.TableDb;
@@ -71,7 +72,6 @@ public class OrderController implements Initializable {
                 OrderDb.validOrder(order);
                 orderList.remove(order);
                 orderListBox.getChildren().remove(hboxOrder);
-
                 Label tableLabelDone = new Label("Table " + Document.parse(table).get("number"));
                 Label tableEmplacementLabelDone = new Label("  Salle : " + Document.parse(table).get("emplacement"));
                 Label dishesLabelDone = new Label("  Plats :" + order.getDishesId().size());
@@ -90,6 +90,7 @@ public class OrderController implements Initializable {
 
 
 
+                DishDb.getDishesPrice(order.getDishesId());
             });
 
             orderCancel.setOnMouseClicked(mouseEvent -> {
