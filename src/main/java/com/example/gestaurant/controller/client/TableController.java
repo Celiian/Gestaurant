@@ -6,6 +6,7 @@ import com.example.gestaurant.models.OrderClient;
 import com.example.gestaurant.models.Table;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -19,7 +20,6 @@ public class TableController implements Initializable {
     @FXML
     private ChoiceBox emplacementChoice;
 
-
     @FXML
     private TextField fieldNumberCustomer;
 
@@ -32,6 +32,8 @@ public class TableController implements Initializable {
     @FXML
     private Label labelReserved;
 
+    @FXML
+    private Button searchTable;
 
     private static List<Table> tableList = new ArrayList<>();
 
@@ -52,6 +54,9 @@ public class TableController implements Initializable {
                 System.out.println(e);
             }
         });
+
+
+
     }
 
     public void searchTable(){
@@ -70,6 +75,10 @@ public class TableController implements Initializable {
                 OrderClient.setTableId(tableList.get(0).getId());
                 OrderClient.setName(fieldNameCustomer.getText());
 
+                fieldNameCustomer.setVisible(false);
+                fieldNumberCustomer.setVisible(false);
+                emplacementChoice.setVisible(false);
+                searchTable.setVisible(false);
                 labelReserved.setText("Vous avez réservé la table " + OrderClient.getTable());
             }
             catch (Exception e)

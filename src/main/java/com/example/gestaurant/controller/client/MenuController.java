@@ -10,6 +10,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -48,7 +50,7 @@ public class MenuController implements Initializable {
             ArrayList<String> ingredientList = (ArrayList<String>) dish.get("ingredients");
             String ingredients = ingredientList.stream().map(Object::toString).collect(Collectors.joining(", "));
             if (!Objects.equals(dish.get("status"), "out of stock") && !Objects.equals(dish.get("status"), "coming soon")) {
-                HBox hbox = new HBox(10);
+                HBox hbox = new HBox();
                 Label labelId = new Label(dish.get("_id").toString());
                 labelId.setVisible(false);
 
@@ -57,16 +59,24 @@ public class MenuController implements Initializable {
                 Label labelPrice = new Label("Prix : " + price + "€");
                 Button buttonAdd = new Button("Choisir");
 
-                labelName.setMinWidth(130);
-                labelIngredients.setMinWidth(130);
-                labelPrice.setMinWidth(130);
+                labelName.setMinWidth(110);
+                labelIngredients.setMinWidth(110);
+                labelPrice.setMinWidth(90);
                 labelId.setMaxWidth(1);
-                hbox.getChildren().addAll(
-                        labelName,
+                ImageView image = new ImageView((String) dish.get("image"));
+                image.setFitWidth(100);
+                image.setFitHeight(100);
+                HBox hboxInside = new HBox(7);
+                hboxInside.getChildren().addAll(labelName,
                         labelIngredients,
                         labelPrice,
                         buttonAdd,
-                        labelId
+                        labelId);
+                hbox.getChildren().addAll(
+                        image,
+                        hboxInside
+
+
                 );
                 hbox.setMinWidth(600);
 
@@ -85,6 +95,7 @@ public class MenuController implements Initializable {
                     labelIngredientsCart.setMinWidth(130);
                     labelPriceCart.setMinWidth(70);
                     labelIdCart.setMaxWidth(1);
+
                     hboxCart.getChildren().addAll(
                             new VBox(labelNameCart,
                                     labelIngredientsCart
@@ -125,7 +136,7 @@ public class MenuController implements Initializable {
 
         if (OrderClient.getTableId() != null){
             errorOrder.setVisible(false);
-            Order order = new Order(OrderClient.getTableId(), OrderClient.getDishesListId(), totalPrice);
+            Order order = new Order(OrderClient.getTableId(), OrderClient.getDishesListId(), totalPrice, OrderClient.getName());
             OrderDb.addOrder(order);
         }
         else {

@@ -1,23 +1,62 @@
 package com.example.gestaurant.models;
 
+import com.mongodb.client.model.search.DateRangeSearchOperator;
+
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.stream.Collectors;
 
 public class Order {
 
     private String tableId;
     private ArrayList <String> dishesId;
-    private LocalDateTime created;
+    private Date created;
     private String status;
     private int price;
+    private String id;
 
-    public Order(String tableId,ArrayList<String> dishes, float price) {
+    private String customer;
+    public Order(String tableId,ArrayList<String> dishes, float price, String customer) {
         this.tableId = tableId;
         this.dishesId = dishes;
-        this.created = LocalDateTime.now();
-        this.status = "created";
+        this.created = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
+        this.status = "pending";
         this.price = (int) (price * 100);
+        this.customer = customer;
+    }
+
+    public String getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(String customer) {
+        this.customer = customer;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setDishesId(ArrayList<String> dishesId) {
+        this.dishesId = dishesId;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public String getTableId() {
@@ -32,7 +71,7 @@ public class Order {
         return dishesId;
     }
 
-    public LocalDateTime getCreated() {
+    public Date getCreated() {
         return created;
     }
 
