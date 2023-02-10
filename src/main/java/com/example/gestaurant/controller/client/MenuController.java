@@ -1,9 +1,16 @@
 package com.example.gestaurant.controller.client;
 
 import com.example.gestaurant.db.DishDb;
+import com.example.gestaurant.db.OrderDb;
+import com.example.gestaurant.models.Order;
+import com.example.gestaurant.models.OrderClient;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.bson.Document;
@@ -20,6 +27,17 @@ public class MenuController implements Initializable {
     @FXML
     private VBox menuBox;
 
+    @FXML
+    private VBox dishCart;
+
+    @FXML
+    private Label totalAmount;
+
+    @FXML
+    private Label errorOrder;
+
+    private float totalPrice = 0;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         List<String> dishList = DishDb.getDishes();
@@ -29,19 +47,90 @@ public class MenuController implements Initializable {
             float price = (float) variable / 100;
             ArrayList<String> ingredientList = (ArrayList<String>) dish.get("ingredients");
             String ingredients = ingredientList.stream().map(Object::toString).collect(Collectors.joining(", "));
-            System.out.println(dish.get("status"));
-            if (!Objects.equals((String) dish.get("status"), "out of stock") && !Objects.equals((String) dish.get("status"), "coming soon")) {
-                HBox hbox = new HBox(50);
-                hbox.getChildren().addAll(
-                        new Label((String) dish.get("name")),
-                        new Label(ingredients),
-                        new Label("Prix : " + price + "€")
-                );
-                menuBox.getChildren().addAll(
-                        hbox
-                );
-            }
+            if (!Objects.equals(dish.get("status"), "out of stock") && !Objects.equals(dish.get("status"), "coming soon")) {
+                HBox hbox = new HBox(10);
+                Label labelId = new Label(dish.get("_id").toString());
+                labelId.setVisible(false);
 
+                Label labelName = new Label((String) dish.get("name"));
+                Label labelIngredients = new Label(ingredients);
+                Label labelPrice = new Label("Prix : " + price + "€");
+                Button buttonAdd = new Button("Choisir");
+
+                labelName.setMinWidth(130);
+                labelIngredients.setMinWidth(130);
+                labelPrice.setMinWidth(130);
+                labelId.setMaxWidth(1);
+                hbox.getChildren().addAll(
+                        labelName,
+                        labelIngredients,
+                        labelPrice,
+                        buttonAdd,
+                        labelId
+                );
+                hbox.setMinWidth(600);
+
+                buttonAdd.setOnMouseClicked(event -> {
+
+                    HBox hboxCart = new HBox();
+
+                    Label labelNameCart = new Label(labelName.getText());
+                    Label labelIngredientsCart = new Label(labelIngredients.getText());
+                    Label labelPriceCart = new Label(labelPrice.getText());
+                    Label labelIdCart = new Label(labelId.getText());
+                    labelIdCart.setVisible(false);
+                    Button buttonDelete = new Button("Retirer");
+
+                    labelNameCart.setMinWidth(100);
+                    labelIngredientsCart.setMinWidth(130);
+                    labelPriceCart.setMinWidth(70);
+                    labelIdCart.setMaxWidth(1);
+                    hboxCart.getChildren().addAll(
+                            new VBox(labelNameCart,
+                                    labelIngredientsCart
+                            ),
+                            new VBox(
+                                    labelPriceCart,
+                                    buttonDelete,
+                                    labelIdCart)
+                    );
+
+                    dishCart.getChildren().add(hboxCart);
+
+                    totalPrice += price;
+                    totalAmount.setText("TOTAL   -----------------   " + totalPrice +" €");
+                    OrderClient.addToDishesList(labelIdCart.getText());
+
+                    buttonDelete.setOnMouseClicked(eventDelete -> {
+                        dishCart.getChildren().remove(hboxCart);
+                        totalPrice -= price;
+                        totalAmount.setText("TOTAL   -----------------   " + totalPrice +" €");
+                        OrderClient.removeFromList(labelIdCart.getText());
+
+                    });
+                });
+
+                try {
+                    menuBox.getChildren().addAll(
+                            hbox
+                    );
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+            }
         });
+    }
+
+    public void orderDishes(){
+
+        if (OrderClient.getTableId() != null){
+            errorOrder.setVisible(false);
+            Order order = new Order(OrderClient.getTableId(), OrderClient.getDishesListId(), totalPrice);
+            OrderDb.addOrder(order);
+        }
+        else {
+            errorOrder.setVisible(true);
+        }
+
     }
 }

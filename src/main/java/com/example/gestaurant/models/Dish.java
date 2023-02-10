@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Dish {
 
+    private String id;
     private String name;
     private ArrayList <String> ingredients;
     private String image;
@@ -25,7 +26,7 @@ public class Dish {
                 '}';
     }
 
-    public Dish(String name, ArrayList<String> ingredients, String image, int price, int cost, String status, String category) {
+    public Dish(String name, ArrayList<String> ingredients, String image, int price, int cost, String status, String category, String id) {
         this.name = name;
         this.ingredients = ingredients;
         this.image = image;
@@ -33,6 +34,15 @@ public class Dish {
         this.cost = cost;
         this.status = status;
         this.category = category;
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {

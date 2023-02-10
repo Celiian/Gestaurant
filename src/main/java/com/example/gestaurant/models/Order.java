@@ -6,23 +6,48 @@ import java.util.stream.Collectors;
 
 public class Order {
 
-    //private Table table;
-    private ArrayList <Dish> dishes;
+    private String tableId;
+    private ArrayList <String> dishesId;
     private LocalDateTime created;
     private String status;
     private int price;
 
-    public Order(ArrayList<Dish> dishes) {
-        this.dishes = dishes;
+    public Order(String tableId,ArrayList<String> dishes, float price) {
+        this.tableId = tableId;
+        this.dishesId = dishes;
         this.created = LocalDateTime.now();
         this.status = "created";
-        this.price = dishes.stream().map(Dish::getPrice).collect(Collectors.summingInt(Integer::intValue));
+        this.price = (int) (price * 100);
+    }
+
+    public String getTableId() {
+        return tableId;
+    }
+
+    public void setTableId(String tableId) {
+        this.tableId = tableId;
+    }
+
+    public ArrayList<String> getDishesId() {
+        return dishesId;
+    }
+
+    public LocalDateTime getCreated() {
+        return created;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public int getPrice() {
+        return price;
     }
 
     @Override
     public String toString() {
         return "Order {" +
-                "dishes: " + dishes +
+                "dishes: " + dishesId +
                 ", created: " + created +
                 ", status: '" + status + '\'' +
                 ", price: " + price +

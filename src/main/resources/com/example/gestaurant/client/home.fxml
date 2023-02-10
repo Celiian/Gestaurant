@@ -41,19 +41,24 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestaurant.controller.client.HomeController">
+<VBox maxHeight="600.0" minHeight="600.0" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestaurant.controller.client.HomeController">
    <children>
-      <SplitPane dividerPositions="0.8012249443207127" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+      <SplitPane dividerPositions="0.8012249443207127" focusTraversable="true" minHeight="600.0" prefHeight="600.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <items>
-            <VBox fx:id="boxGlobalClient" prefHeight="200.0" prefWidth="100.0">
+            <VBox fx:id="boxGlobalClient" minHeight="600.0" prefHeight="600.0" prefWidth="100.0">
                <children>
-                  <VBox fx:id="menuPage" prefHeight="600.0" prefWidth="720.0">
+                  <VBox fx:id="menuPage" minHeight="600.0" prefHeight="600.0" prefWidth="720.0">
                      <children>
                         <fx:include source="menu.fxml" />
                      </children>
                   </VBox>
+                  <VBox fx:id="tablePage" minHeight="600.0" prefHeight="600.0" prefWidth="100.0">
+                     <children>
+                        <fx:include source="table.fxml" />
+                     </children>
+                  </VBox>
                </children></VBox>
-            <AnchorPane prefHeight="598.0" prefWidth="169.0" SplitPane.resizableWithParent="false">
+            <AnchorPane prefHeight="598.0" prefWidth="168.0" SplitPane.resizableWithParent="false">
                <children>
                   <Label alignment="CENTER" layoutX="51.0" layoutY="17.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Navigation" textAlignment="CENTER" wrapText="false">
                      <font>
@@ -63,9 +68,9 @@
                         <Color red="0.624" green="0.624" blue="0.624" fx:id="x2" />
                      </textFill>
                   </Label>
-                  <Button fx:id="boutonBibliotheque" layoutX="41.0" layoutY="70.0" mnemonicParsing="false" onAction="#dishPage" text="Voir notre menu" />
-                  <Button fx:id="boutonConversions" layoutX="39.0" layoutY="124.0" mnemonicParsing="false" text="Choisir une table" />
-                  <Button fx:id="boutonArmee" layoutX="63.0" layoutY="192.0" mnemonicParsing="false" text="Quitter" />
+                  <Button layoutX="41.0" layoutY="70.0" mnemonicParsing="false" onAction="#dishPage" text="Voir notre menu" />
+                  <Button layoutX="39.0" layoutY="124.0" mnemonicParsing="false" onAction="#tablePage" text="Choisir une table" />
+                  <Button layoutX="63.0" layoutY="192.0" mnemonicParsing="false" text="Quitter" />
                   <Line endX="120.0" layoutX="55.0" layoutY="273.0" startX="-60.0" />
                   <Label alignment="CENTER" layoutX="54.0" layoutY="288.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Contact" textAlignment="CENTER" wrapText="false">
                      <font>
