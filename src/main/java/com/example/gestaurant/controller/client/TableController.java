@@ -5,6 +5,7 @@ import com.example.gestaurant.db.TableDb;
 import com.example.gestaurant.models.Order;
 import com.example.gestaurant.models.OrderClient;
 import com.example.gestaurant.models.Table;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -34,6 +35,8 @@ public class TableController implements Initializable {
     @FXML
     private Button tableSearch;
     @FXML
+    private Button leaveBtn;
+    @FXML
     private Label labelNb;
     @FXML
     private Label labelName;
@@ -43,7 +46,7 @@ public class TableController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         List<String> stringTableList = TableDb.getTables();
         stringTableList.stream().map(Document::parse).forEach(table -> {
-            tableList.add(new Table((Integer) table.get("number"), (String) table.get("image"), (Integer) table.get("size"), (String) table.get("emplacement"), table.get("_id").toString()));
+            tableList.add(new Table((Integer) table.get("number"), (String) table.get("image"), (Integer) table.get("size"), (String) table.get("emplacement"), table.get("_id").toString(), (String) table.get("customer")));
         });
         emplacementChoice.setValue("Ou voulez vous manger ?");
 
@@ -70,19 +73,27 @@ public class TableController implements Initializable {
                 String emplacement = (String) emplacementChoice.getValue();
                 List<Table> validTableList = tableList.stream()
                         .filter(table -> table.getSize() >= customerNumber
-                                && Objects.equals(table.getLocation(), emplacement))
+                                && Objects.equals(table.getLocation(), emplacement) && Objects.equals(table.getCustomer(), "empty"))
                         .sorted(Comparator.comparing(Table::getSize)).toList();
-                OrderClient.setTable(validTableList.get(0).getNumber());
-                OrderClient.setTableId(tableList.get(0).getId());
-                OrderClient.setName(customerName);
+                if (validTableList.size() == 0){
+                    labelReserved.setText("Nous sommes désolés, nous n'avons aucune table disponible dans cette salle");
+                }
+                else {
+                    OrderClient.setTable(validTableList.get(0).getNumber());
+                    OrderClient.setTableId(tableList.get(0).getId());
+                    OrderClient.setName(customerName);
 
-                fieldNameCustomer.setVisible(false);
-                fieldNumberCustomer.setVisible(false);
-                emplacementChoice.setVisible(false);
-                tableSearch.setVisible(false);
-                labelNb.setVisible(false);
-                labelName.setVisible(false);
-                labelReserved.setText("Vous avez réservé la table " + OrderClient.getTable());
+                    fieldNameCustomer.setVisible(false);
+                    fieldNumberCustomer.setVisible(false);
+                    emplacementChoice.setVisible(false);
+                    tableSearch.setVisible(false);
+                    labelNb.setVisible(false);
+                    labelName.setVisible(false);
+
+                    TableDb.JoinLeaveTable(validTableList.get(0).getId(), false);
+                    labelReserved.setText("Vous avez réservé la table " + OrderClient.getTable());
+                    leaveBtn.setVisible(true);
+                }
             } catch (Exception e) {
                 System.out.println(e);
                 errorLabel.setVisible(true);
@@ -94,5 +105,12 @@ public class TableController implements Initializable {
                 labelName.setVisible(true);
             }
         }
+    }
+
+
+    public void leave(){
+        TableDb.JoinLeaveTable(OrderClient.getTableId(), true);
+
+        Platform.exit();
     }
 }

@@ -45,8 +45,6 @@ public class OrderDb {
             System.out.println("Matched document count: " + result.getMatchedCount());
             System.out.println("Modified document count: " + result.getModifiedCount());
         }
-
-
     }
 
     public static List<String> getOrdersOpen() {
