@@ -1,5 +1,6 @@
 package com.example.gestaurant.models;
 
+import com.example.gestaurant.db.StatusDb;
 import javafx.application.Platform;
 import javafx.scene.control.Label;
 
@@ -17,6 +18,11 @@ public class TimerThread extends Thread {
     public void run() {
         int min = 25;
         for (int sec = 0; min >= 0; sec --) {
+
+            if (min == 15)
+            {
+                StatusDb.changeStatus(false);
+            }
             if (sec == 0){
                 min --;
                 sec = 59;

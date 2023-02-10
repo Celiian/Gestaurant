@@ -1,5 +1,6 @@
 package com.example.gestaurant.controller.staff;
 
+import com.example.gestaurant.db.StatusDb;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -40,6 +41,7 @@ public class HomeController implements Initializable {
 
 
     public void quit(){
+        StatusDb.changeStatus(false);
         Platform.exit();
     }
 
