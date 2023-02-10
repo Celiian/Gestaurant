@@ -41,6 +41,7 @@ public class TimerThread extends Thread {
             } else {
                 minute = finalMin;
             }
+
             Platform.runLater(() -> label.setText(minute + ":" + second));
             try {
                 TimeUnit.SECONDS.sleep(1);

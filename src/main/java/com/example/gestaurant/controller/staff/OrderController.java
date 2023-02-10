@@ -5,6 +5,7 @@ import com.example.gestaurant.db.OrderDb;
 import com.example.gestaurant.db.StatusDb;
 import com.example.gestaurant.db.TableDb;
 import com.example.gestaurant.models.Order;
+import com.example.gestaurant.models.RefreshThread;
 import com.example.gestaurant.models.TimerThread;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -24,21 +25,16 @@ public class OrderController implements Initializable {
 
     @FXML
     private Label timer;
-
     @FXML
     private Label service;
     @FXML
     private Button btnStart;
-
     @FXML
     private VBox orderListBox;
-
     @FXML
     private VBox ordersDone;
 
-
     private static List<Order> orderList = new ArrayList<>();
-
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         List<String> stringOrderList = OrderDb.getOrdersOpen();
@@ -52,7 +48,6 @@ public class OrderController implements Initializable {
 
             i[0]++;
         });
-
 
         orderList.stream().forEach(order -> {
             String table = TableDb.getATable(order.getTableId());
@@ -107,5 +102,8 @@ public class OrderController implements Initializable {
         StatusDb.changeStatus(true);
         TimerThread timerThread = new TimerThread(timer);
         timerThread.start();
+
+        RefreshThread refreshThread = new RefreshThread(orderListBox, ordersDone);
+        refreshThread.start();
     }
 }
