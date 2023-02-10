@@ -103,7 +103,5 @@ public class OrderController implements Initializable {
         TimerThread timerThread = new TimerThread(timer);
         timerThread.start();
 
-        RefreshThread refreshThread = new RefreshThread(orderListBox, ordersDone);
-        refreshThread.start();
     }
 }
