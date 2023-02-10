@@ -31,6 +31,10 @@ public class OrderController implements Initializable {
     @FXML
     private VBox orderListBox;
 
+    @FXML
+    private VBox ordersDone;
+
+
     private static List<Order> orderList = new ArrayList<>();
 
 
@@ -66,6 +70,25 @@ public class OrderController implements Initializable {
                 OrderDb.validOrder(order);
                 orderList.remove(order);
                 orderListBox.getChildren().remove(hboxOrder);
+
+                Label tableLabelDone = new Label("Table " + Document.parse(table).get("number"));
+                Label tableEmplacementLabelDone = new Label("  Salle : " + Document.parse(table).get("emplacement"));
+                Label dishesLabelDone = new Label("  Plats :" + order.getDishesId().size());
+
+                if (ordersDone.getChildren().size() == 5){
+                    ordersDone.getChildren().remove(0);
+                }
+
+                ordersDone.getChildren().addAll(
+                        new HBox(
+                        tableLabelDone,
+                        tableEmplacementLabelDone,
+                        dishesLabelDone)
+                );
+
+
+
+
             });
 
             orderCancel.setOnMouseClicked(mouseEvent -> {
