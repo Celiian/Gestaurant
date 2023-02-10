@@ -18,7 +18,7 @@ public class Pdf {
 
     public static void main(String path) throws IOException {
         if(path != null){
-            DEST = path;
+            DEST = path + "/finance.pdf";
         }
         File file = new File(DEST);
         file.getParentFile().mkdirs();
