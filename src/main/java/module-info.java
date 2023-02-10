@@ -15,4 +15,6 @@ module com.example.gestaurant {
     opens com.example.gestaurant.controller to javafx.fxml;
     exports com.example.gestaurant.controller.client;
     opens com.example.gestaurant.controller.client to javafx.fxml;
+    exports com.example.gestaurant.controller.staff;
+    opens com.example.gestaurant.controller.staff to javafx.fxml;
 }

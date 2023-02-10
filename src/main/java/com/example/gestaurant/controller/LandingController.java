@@ -1,5 +1,6 @@
 package com.example.gestaurant.controller;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -19,30 +20,39 @@ public class LandingController implements Initializable {
     @FXML
     private VBox landingBox;
 
-
     @FXML
     private VBox customerBox;
+
+    @FXML
+    private VBox staffBox;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        globalBox.getChildren().removeAll(customerBox);
-
+            clear();
+            globalBox.getChildren().add(landingBox);
     }
 
     public void customerPage(){
-        globalBox.getChildren().removeAll(landingBox);
+        clear();
         globalBox.getChildren().addAll(customerBox);
     }
 
 
     public void staffPage(){
+        clear();
+        globalBox.getChildren().addAll(staffBox);
+    }
 
+    public void clear(){
+        globalBox.getChildren().removeAll(customerBox);
+        globalBox.getChildren().removeAll(landingBox);
+        globalBox.getChildren().remove(staffBox);
     }
 
 
-    public void clear(){
-
+    public void quit(){
+        Platform.exit();
     }
 
 }
