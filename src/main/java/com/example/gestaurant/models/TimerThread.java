@@ -15,11 +15,11 @@ public class TimerThread extends Thread {
 
     @Override
     public void run() {
-        int min = 0;
-        for (int sec = 0; min <= 60; sec ++) {
-            if (sec == 60){
-                min ++;
-                sec = 0;
+        int min = 25;
+        for (int sec = 0; min >= 0; sec --) {
+            if (sec == 0){
+                min --;
+                sec = 59;
             }
             String finalSec = String.valueOf(sec);
             String finalMin = String.valueOf(min);

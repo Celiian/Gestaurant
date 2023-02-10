@@ -31,7 +31,7 @@ public class TableController implements Initializable {
     @FXML
     private Label labelReserved;
     @FXML
-    private Button searchTable;
+    private Button tableSearch;
     @FXML
     private Label labelNb;
     @FXML
@@ -71,20 +71,26 @@ public class TableController implements Initializable {
                         .filter(table -> table.getSize() >= customerNumber
                                 && Objects.equals(table.getLocation(), emplacement))
                         .sorted(Comparator.comparing(Table::getSize)).toList();
-                OrderClient.setTable(tableList.get(0).getNumber());
+                OrderClient.setTable(validTableList.get(0).getNumber());
                 OrderClient.setTableId(tableList.get(0).getId());
-                OrderClient.setName(fieldNameCustomer.getText());
+                OrderClient.setName(customerName);
 
                 fieldNameCustomer.setVisible(false);
                 fieldNumberCustomer.setVisible(false);
                 emplacementChoice.setVisible(false);
-                searchTable.setVisible(false);
+                tableSearch.setVisible(false);
                 labelNb.setVisible(false);
                 labelName.setVisible(false);
                 labelReserved.setText("Vous avez réservé la table " + OrderClient.getTable());
             } catch (Exception e) {
                 System.out.println(e);
                 errorLabel.setVisible(true);
+                fieldNameCustomer.setVisible(true);
+                fieldNumberCustomer.setVisible(true);
+                emplacementChoice.setVisible(true);
+                tableSearch.setVisible(true);
+                labelNb.setVisible(true);
+                labelName.setVisible(true);
             }
         }
     }

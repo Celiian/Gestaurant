@@ -21,7 +21,7 @@
                         <Label fx:id="labelNb" layoutX="20.0" layoutY="73.0" prefHeight="18.0" prefWidth="134.0" text="Combien êtes-vous ?" />
                         <ChoiceBox fx:id="emplacementChoice" layoutX="331.0" layoutY="69.0" prefHeight="27.0" prefWidth="182.0" />
                         <TextField fx:id="fieldNumberCustomer" layoutX="161.0" layoutY="69.0" />
-                        <Button layoutX="532.0" layoutY="67.0" mnemonicParsing="false" onAction="#searchTable" text="Chercher" />
+                        <Button fx:id="tableSearch" layoutX="532.0" layoutY="67.0" mnemonicParsing="false" onAction="#searchTable" text="Chercher" />
                         <Label fx:id="errorLabel" layoutX="164.0" layoutY="98.0" prefHeight="18.0" prefWidth="147.0" text="Veuillez entrer un nombre valide " textFill="RED" visible="false">
                            <font>
                               <Font size="10.0" />
