@@ -86,6 +86,7 @@
                            <children>
                               <VBox fx:id="menuBox" fillWidth="false" prefHeight="599.0" prefWidth="388.0" spacing="50.0" />
                               <Button mnemonicParsing="false" onAction="#orderDishes" prefHeight="26.0" prefWidth="98.0" text="Commander" />
+                              <Label fx:id="errorOrder" text="Merci de choisir une table en premier lieu" textFill="RED" visible="false" />
                            </children>
                         </VBox>
                      </children>

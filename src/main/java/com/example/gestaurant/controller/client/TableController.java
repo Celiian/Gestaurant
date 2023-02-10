@@ -39,7 +39,7 @@ public class TableController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         List<String> stringTableList = TableDb.getTables();
         stringTableList.stream().map(Document::parse).forEach(table -> {
-            tableList.add(new Table((Integer) table.get("number"), (String) table.get("image"), (Integer) table.get("size"), (String) table.get("emplacement")));
+            tableList.add(new Table((Integer) table.get("number"), (String) table.get("image"), (Integer) table.get("size"), (String) table.get("emplacement"), table.get("_id").toString()));
         });
         emplacementChoice.setValue("Ou voulez vous manger ?");
 
@@ -67,6 +67,7 @@ public class TableController implements Initializable {
                                 && Objects.equals(table.getLocation(), emplacement))
                         .sorted(Comparator.comparing(Table::getSize)).toList();
                 OrderClient.setTable(tableList.get(0).getNumber());
+                OrderClient.setTableId(tableList.get(0).getId());
                 OrderClient.setName(fieldNameCustomer.getText());
 
                 labelReserved.setText("Vous avez réservé la table " + OrderClient.getTable());

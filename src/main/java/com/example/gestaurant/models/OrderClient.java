@@ -6,6 +6,8 @@ public class OrderClient {
 
     public static int table;
 
+    public static String tableId;
+
     public static String name = "";
 
 
@@ -28,6 +30,13 @@ public class OrderClient {
         OrderClient.name = name;
     }
 
+    public static String getTableId() {
+        return tableId;
+    }
+
+    public static void setTableId(String tableId) {
+        OrderClient.tableId = tableId;
+    }
 
     public static ArrayList<String> getDishesListId() {
         return dishesListId;

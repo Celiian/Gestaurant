@@ -9,11 +9,23 @@ public class Table {
     private String location;
     private String customer;
 
-    public Table(int number, String picture, int size, String location) {
+    private String id;
+
+    public Table(int number, String picture, int size, String location, String id) {
         this.number = number;
         this.picture = picture;
         this.size = size;
         this.location = location;
+        this.id = id;
+    }
+
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public int getNumber() {

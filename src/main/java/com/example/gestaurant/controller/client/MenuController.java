@@ -1,6 +1,8 @@
 package com.example.gestaurant.controller.client;
 
 import com.example.gestaurant.db.DishDb;
+import com.example.gestaurant.db.OrderDb;
+import com.example.gestaurant.models.Order;
 import com.example.gestaurant.models.OrderClient;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -30,6 +32,9 @@ public class MenuController implements Initializable {
 
     @FXML
     private Label totalAmount;
+
+    @FXML
+    private Label errorOrder;
 
     private float totalPrice = 0;
 
@@ -117,6 +122,15 @@ public class MenuController implements Initializable {
     }
 
     public void orderDishes(){
-        System.out.println(OrderClient.getDishesListId());
+
+        if (OrderClient.getTableId() != null){
+            errorOrder.setVisible(false);
+            Order order = new Order(OrderClient.getTableId(), OrderClient.getDishesListId(), totalPrice);
+            OrderDb.addOrder(order);
+        }
+        else {
+            errorOrder.setVisible(true);
+        }
+
     }
 }
