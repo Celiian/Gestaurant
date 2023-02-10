@@ -48,8 +48,16 @@ public class TableDb {
             FindIterable<Document> collectionTables = MongoDb.database.getCollection("Tables").find();
 
             List<String> tables = new ArrayList<>();
-            for (Document collectionTable : collectionTables) {
-                tables.add(collectionTable.toJson());
+            for (Document table : collectionTables) {
+                Bson filter = Filters.eq("_id", new ObjectId(table.get("_id").toString()));
+                Document document;
+                document = new Document("customer", "empty");
+                document.append("size", table.get("size"))
+                        .append("emplacement", table.get("emplacement"))
+                        .append("number", table.get("number"))
+                        .append("image", table.get("image"));
+
+                MongoDb.database.getCollection("Tables").replaceOne(filter, document);
             }
         }
     }
