@@ -1,6 +1,8 @@
 package com.example.gestaurant.db;
 
+import com.example.gestaurant.models.Dish;
 import com.example.gestaurant.models.Service;
+import com.example.gestaurant.models.TableGestaurant;
 import com.mongodb.BasicDBObject;
 import com.mongodb.client.*;
 import org.bson.Document;
@@ -70,6 +72,22 @@ public class DishDb {
             }
 
             return dishes;
+        }
+    }
+
+    public static void addDish(Dish dish) {
+        try (MongoClient mongoClient = MongoClients.create(MongoDb.url)) {
+            MongoDb.database = mongoClient.getDatabase("gestaurant");
+
+            Document document = new Document();
+            document.append("name", dish.getName())
+                    .append("ingredients", dish.getIngredients())
+                    .append("image", dish.getImage())
+                    .append("price", dish.getPrice())
+                    .append("cost", dish.getCost());
+
+
+            MongoDb.database.getCollection("Dishes").insertOne(document);
         }
     }
 }

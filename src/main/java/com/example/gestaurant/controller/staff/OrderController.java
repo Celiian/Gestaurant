@@ -4,22 +4,18 @@ import com.example.gestaurant.db.DishDb;
 import com.example.gestaurant.db.OrderDb;
 import com.example.gestaurant.db.StatusDb;
 import com.example.gestaurant.db.TableDb;
-import com.example.gestaurant.models.Order;
-import com.example.gestaurant.models.RefreshThread;
-import com.example.gestaurant.models.TimerThread;
+import com.example.gestaurant.models.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.bson.Document;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class OrderController implements Initializable {
 
@@ -33,6 +29,29 @@ public class OrderController implements Initializable {
     private VBox orderListBox;
     @FXML
     private VBox ordersDone;
+
+
+    @FXML
+    private TextField emplacementField;
+    @FXML
+    private TextField numberField;
+    @FXML
+    private TextField sizeField;
+    @FXML
+    private TextField priceField;
+    @FXML
+    private TextField costField;
+    @FXML
+    private Button tableButton;
+    @FXML
+    private Button dishButton;
+    @FXML
+    private Button validateTable;
+    @FXML
+    private Button validateDish;
+
+
+
 
     private static List<Order> orderList = new ArrayList<>();
 
@@ -103,5 +122,64 @@ public class OrderController implements Initializable {
         TimerThread timerThread = new TimerThread(timer);
         timerThread.start();
 
+    }
+
+
+    public void addDish(){
+        emplacementField.setVisible(true);
+        emplacementField.setPromptText("name");
+        numberField.setVisible(true);
+        numberField.setPromptText("ingredients");
+        sizeField.setVisible(true);
+        sizeField.setPromptText("image");
+        validateDish.setVisible(true);
+        priceField.setVisible(true);
+        costField.setVisible(true);
+        tableButton.setVisible(false);
+        dishButton.setVisible(false);
+    }
+
+    public void validateDish(){
+        if (emplacementField.getText() != null && numberField.getText() != null && sizeField.getText() != null){
+            ArrayList<String> parts = new ArrayList<>();
+            Arrays.stream(numberField.getText().split(",")).forEach(ingredient -> {
+                parts.add(ingredient);
+            });
+
+            DishDb.addDish(new Dish(emplacementField.getText(), parts, sizeField.getText(), Integer.parseInt(priceField.getText()), Integer.parseInt(costField.getText()), "available", "", ""));
+            emplacementField.setVisible(false);
+            validateTable.setVisible(false);
+            priceField.setVisible(false);
+            costField.setVisible(false);
+            numberField.setVisible(false);
+            sizeField.setVisible(false);
+            validateDish.setVisible(false);
+            tableButton.setVisible(true);
+            dishButton.setVisible(true);
+        }
+    }
+
+
+
+    public void addTable(){
+        emplacementField.setVisible(true);
+        numberField.setVisible(true);
+        sizeField.setVisible(true);
+        validateTable.setVisible(true);
+        tableButton.setVisible(false);
+        dishButton.setVisible(false);
+    }
+
+
+    public void validateTable(){
+        if (emplacementField.getText() != null && numberField.getText() != null && sizeField.getText() != null){
+            TableDb.addTable(new TableGestaurant(Integer.parseInt(numberField.getText()), "",Integer.parseInt(sizeField.getText()), emplacementField.getText(), "", ""));
+            emplacementField.setVisible(false);
+            numberField.setVisible(false);
+            sizeField.setVisible(false);
+            validateTable.setVisible(false);
+            tableButton.setVisible(true);
+            dishButton.setVisible(true);
+        }
     }
 }

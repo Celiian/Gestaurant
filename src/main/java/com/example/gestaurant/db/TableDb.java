@@ -1,6 +1,7 @@
 package com.example.gestaurant.db;
 
 import com.example.gestaurant.models.OrderClient;
+import com.example.gestaurant.models.TableGestaurant;
 import com.mongodb.client.*;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.result.UpdateResult;
@@ -85,4 +86,18 @@ public class TableDb {
 
         }
     }
+
+    public static void addTable(TableGestaurant table) {
+        try (MongoClient mongoClient = MongoClients.create(MongoDb.url)) {
+            MongoDb.database = mongoClient.getDatabase("gestaurant");
+
+            Document document = new Document();
+            document.append("size", table.getSize())
+                    .append("emplacement", table.getLocation())
+                    .append("number", table.getNumber());
+
+            MongoDb.database.getCollection("Tables").insertOne(document);
+        }
+    }
+
 }
