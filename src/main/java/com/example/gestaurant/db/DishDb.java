@@ -14,6 +14,7 @@ import java.util.List;
 
 public class DishDb {
 
+    //get all dishes from the database
     public static List<String> getDishes() {
         try (MongoClient mongoClient = MongoClients.create(MongoDb.url)) {
             MongoDb.database = mongoClient.getDatabase("gestaurant");
@@ -28,11 +29,13 @@ public class DishDb {
         }
     }
 
+    //get all dishes price from the database
     public static void getDishesPrice(ArrayList<String> dishesId) {
+        //try connect to the database and get the collection Dishes
         try (MongoClient mongoClient = MongoClients.create(MongoDb.url)) {
             MongoDb.database = mongoClient.getDatabase("gestaurant");
             MongoCollection<Document> collectionDishes = MongoDb.database.getCollection("Dishes");
-
+            //convert the dishesId from String to ObjectId
             ArrayList<ObjectId> dishesObjectId = new ArrayList<>();
             dishesId.stream().forEach(dish -> {
                 dishesObjectId.add(new ObjectId(dish));
@@ -43,7 +46,7 @@ public class DishDb {
             inQuery.put("_id", new BasicDBObject("$in", dishesObjectId));
             FindIterable<Document> dishesDoc = collectionDishes.find(inQuery);
 
-
+            //add the price of each dish to the total gain
             dishesDoc.forEach(dish -> {
                         Service.addTotalGain((Integer) dish.get("price"));
                         Service.addTotalCost((Integer) dish.get("cost"));
@@ -51,6 +54,7 @@ public class DishDb {
         }
     }
 
+    //get dish by id for the order
     public static List<String> getDishesById(ArrayList<String> dishesId) {
         try (MongoClient mongoClient = MongoClients.create(MongoDb.url)) {
             MongoDb.database = mongoClient.getDatabase("gestaurant");
@@ -75,6 +79,7 @@ public class DishDb {
         }
     }
 
+    //add dish to the database
     public static void addDish(Dish dish) {
         try (MongoClient mongoClient = MongoClients.create(MongoDb.url)) {
             MongoDb.database = mongoClient.getDatabase("gestaurant");

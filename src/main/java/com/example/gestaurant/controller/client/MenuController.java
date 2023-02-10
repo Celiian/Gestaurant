@@ -41,6 +41,7 @@ public class MenuController implements Initializable {
 
     private float totalPrice = 0;
 
+    // initialize the menu with the dishes from the database
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         List<String> dishList = DishDb.getDishes();
@@ -79,12 +80,13 @@ public class MenuController implements Initializable {
                 );
                 hbox.setMinWidth(600);
 
+                // if the dish is out of stock, the button is disabled
                 if (Objects.equals(dish.get("status"), "out of stock")) {
                     hboxInside.setDisable(true);
                     buttonAdd.setText("Out of stock");
                 }
                 else {
-
+                    // if the dish is available, the button is enabled
                     buttonAdd.setOnMouseClicked(event -> {
 
                         HBox hboxCart = new HBox();
@@ -117,11 +119,12 @@ public class MenuController implements Initializable {
                         );
 
                         dishCart.getChildren().add(hboxCart);
-
+                        // add the price of the dish to the total price
                         totalPrice += price;
                         totalAmount.setText("TOTAL   -----------------   " + totalPrice + " €");
                         OrderClient.addToDishesList(labelIdCart.getText());
 
+                        // remove the dish from the cart
                         buttonDelete.setOnMouseClicked(eventDelete -> {
                             dishCart.getChildren().remove(hboxCart);
                             totalPrice -= price;
@@ -131,6 +134,7 @@ public class MenuController implements Initializable {
                         });
                     });
                 }
+                // try add the dish to the menuBox
                 try {
                     menuBox.getChildren().addAll(
                             hbox

@@ -17,6 +17,7 @@ import static com.mongodb.client.model.Filters.or;
 
 public class OrderDb {
 
+    //get all orders from the database
     public static List<String> getOrders() {
         try (MongoClient mongoClient = MongoClients.create(MongoDb.url)) {
             MongoDb.database = mongoClient.getDatabase("gestaurant");
@@ -33,6 +34,7 @@ public class OrderDb {
     }
 
 
+    //transform the order from pending to done
     public static void validOrder(Order order){
         try (MongoClient mongoClient = MongoClients.create(MongoDb.url)) {
             MongoDb.database = mongoClient.getDatabase("gestaurant");
@@ -48,12 +50,13 @@ public class OrderDb {
         }
     }
 
+    //get all orders from the database with the status pending
     public static List<String> getOrdersOpen() {
         try (MongoClient mongoClient = MongoClients.create(MongoDb.url)) {
             MongoDb.database = mongoClient.getDatabase("gestaurant");
             FindIterable<Document> collectionOrders= MongoDb.database.getCollection("Orders").find(eq("status", "pending"));
-
             List<String> orders = new ArrayList<>();
+            //transform the order in json
             for (Document collectionOrder : collectionOrders) {
                 orders.add(collectionOrder.toJson());
             }
@@ -64,7 +67,7 @@ public class OrderDb {
     }
 
 
-
+    //add an order in the database
     public static void addOrder(Order order) {
         try (MongoClient mongoClient = MongoClients.create(MongoDb.url)) {
             MongoDb.database = mongoClient.getDatabase("gestaurant");
@@ -78,7 +81,7 @@ public class OrderDb {
         }
     }
 
-
+    //delete an order in the database
     public static void deleteOrder(String id) {
         try (MongoClient mongoClient = MongoClients.create(MongoDb.url)) {
             MongoDb.database = mongoClient.getDatabase("gestaurant");
@@ -86,6 +89,8 @@ public class OrderDb {
                     .append("_id", new ObjectId(id)));
         }
     }
+
+    //get orders by id
     public static List<String> getOrdersById(ArrayList<String> ordersId) {
         try (MongoClient mongoClient = MongoClients.create(MongoDb.url)) {
             MongoDb.database = mongoClient.getDatabase("gestaurant");
@@ -96,11 +101,11 @@ public class OrderDb {
                 ordersObjectId.add(new ObjectId(order));
             });
 
-
             BasicDBObject inQuery = new BasicDBObject();
             inQuery.put("_id", new BasicDBObject("$in", ordersObjectId));
             FindIterable<Document> ordersDoc = collectionOrders.find(inQuery);
 
+            //transform the order in json
             List<String> orders = new ArrayList<>();
             for (Document collectionOrder : ordersDoc) {
                 orders.add(collectionOrder.toJson());

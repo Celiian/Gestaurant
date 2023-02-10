@@ -28,17 +28,19 @@ public class HomeController implements Initializable {
         clear();
     }
 
+    //clear the page
     public void staffPage(){
         clear();
     }
 
+    //clear and add the finance page
     public void financePage(){
         clear();
         boxGlobalStaff.getChildren().add(financePage);
 
     }
 
-
+    //clear and add the order page
     public void orderPage(){
         clear();
         boxGlobalStaff.getChildren().add(orderPage);
@@ -51,15 +53,15 @@ public class HomeController implements Initializable {
 
     }
 
-
-
+    //clear the page
     public void clear(){
         boxGlobalStaff.getChildren().remove(employeePage);
         boxGlobalStaff.getChildren().remove(financePage);
         boxGlobalStaff.getChildren().remove(orderPage);
-    }
+    };
 
- 
+
+    //quit the application and change the status
     public void quit(){
         StatusDb.changeStatus(false);
         Platform.exit();

@@ -41,14 +41,16 @@ public class TableController implements Initializable {
     private Label labelName;
     private static List<TableGestaurant> tableList = new ArrayList<>();
 
+    //
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         List<String> stringTableList = TableDb.getTables();
+        //transform string to Document
         stringTableList.stream().map(Document::parse).forEach(table -> {
             tableList.add(new TableGestaurant((Integer) table.get("number"), (String) table.get("image"), (Integer) table.get("size"), (String) table.get("emplacement"), table.get("_id").toString(), (String) table.get("customer")));
         });
         emplacementChoice.setValue("Ou voulez vous manger ?");
-
+        //transform tableList to emplacementList
         tableList.stream().map(TableGestaurant::getLocation).distinct().toList().forEach(emplacement -> {
             try {
                 emplacementChoice.getItems().add(
@@ -62,6 +64,7 @@ public class TableController implements Initializable {
 
     }
 
+    //find out if a table is free depending on the number of people, location and availability
     public void searchTable() {
 
         if (fieldNumberCustomer.getText() != null || fieldNameCustomer.getText() != null) {
@@ -74,10 +77,12 @@ public class TableController implements Initializable {
                         .filter(table -> table.getSize() >= customerNumber
                                 && Objects.equals(table.getLocation(), emplacement) && Objects.equals(table.getCustomer(), "empty"))
                         .sorted(Comparator.comparing(TableGestaurant::getSize)).toList();
+                //if there is no table available we display a message
                 if (validTableList.size() == 0){
                     labelReserved.setText("Nous sommes désolés, nous n'avons aucune table disponible dans cette salle");
                 }
                 else {
+                    //else we set the table number and the customer name
                     OrderClient.setTable(validTableList.get(0).getNumber());
                     OrderClient.setTableId(tableList.get(0).getId());
                     OrderClient.setName(customerName);
@@ -94,6 +99,7 @@ public class TableController implements Initializable {
                     leaveBtn.setVisible(true);
                 }
             } catch (Exception e) {
+                //if there is an error we display a message
                 System.out.println(e);
                 errorLabel.setVisible(true);
                 fieldNameCustomer.setVisible(true);
@@ -107,6 +113,7 @@ public class TableController implements Initializable {
     }
 
 
+    //leave the table
     public void leave(){
         TableDb.JoinLeaveTable(OrderClient.getTableId(), true);
 

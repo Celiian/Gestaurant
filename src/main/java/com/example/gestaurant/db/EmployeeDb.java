@@ -12,6 +12,7 @@ import java.util.List;
 
 public class EmployeeDb {
 
+    // get all employees
     public static List<String> getEmployees() {
         try (MongoClient mongoClient = MongoClients.create(MongoDb.url)) {
             MongoDb.database = mongoClient.getDatabase("gestaurant");
@@ -27,6 +28,7 @@ public class EmployeeDb {
 
     }
 
+    // add a employee
     public static void addEmployee(Employee employee) {
         try (MongoClient mongoClient = MongoClients.create(MongoDb.url)) {
             MongoDb.database = mongoClient.getDatabase("gestaurant");
@@ -38,6 +40,7 @@ public class EmployeeDb {
         }
     }
 
+    //delete a employee
     public static void deleteEmployee(String id) {
         try (MongoClient mongoClient = MongoClients.create(MongoDb.url)) {
             MongoDb.database = mongoClient.getDatabase("gestaurant");

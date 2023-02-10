@@ -13,6 +13,7 @@ import static com.mongodb.client.model.Filters.or;
 
 public class StatusDb {
 
+    // get status of the gestaurant
     public static boolean getStatus() {
         try (MongoClient mongoClient = MongoClients.create(MongoDb.url)) {
             MongoDb.database = mongoClient.getDatabase("gestaurant");
@@ -21,6 +22,7 @@ public class StatusDb {
         }
     }
 
+    // change status of the gestaurant
     public static void changeStatus(boolean status) {
         try (MongoClient mongoClient = MongoClients.create(MongoDb.url)) {
             MongoDb.database = mongoClient.getDatabase("gestaurant");

@@ -28,30 +28,33 @@ public class LandingController implements Initializable {
     private VBox staffBox;
 
 
+    //initialize the page landing
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
             clear();
             globalBox.getChildren().add(landingBox);
     }
 
+    //clear the page and add the customer page
     public void customerPage(){
         clear();
         globalBox.getChildren().addAll(customerBox);
     }
 
-
+    //clear the page and add the staff page
     public void staffPage(){
         clear();
         globalBox.getChildren().addAll(staffBox);
     }
 
+    //clear all the page
     public void clear(){
         globalBox.getChildren().removeAll(customerBox);
         globalBox.getChildren().removeAll(landingBox);
         globalBox.getChildren().remove(staffBox);
     }
 
-
+    //quit the application and change the status
     public void quit(){
         Platform.exit();
     }

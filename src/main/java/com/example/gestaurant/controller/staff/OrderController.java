@@ -55,6 +55,7 @@ public class OrderController implements Initializable {
 
     private static List<Order> orderList = new ArrayList<>();
 
+    //initialize the page with the orders
     public void initialize(URL url, ResourceBundle resourceBundle) {
         List<String> stringOrderList = OrderDb.getOrdersOpen();
         final int[] i = {0};
@@ -67,7 +68,7 @@ public class OrderController implements Initializable {
 
             i[0]++;
         });
-
+        //display the orders
         orderList.stream().forEach(order -> {
             String table = TableDb.getATable(order.getTableId());
             Label tableLabel = new Label("Numéro de table : " + Document.parse(table).get("number"));
@@ -81,7 +82,7 @@ public class OrderController implements Initializable {
             orderListBox.getChildren().addAll(
                     hboxOrder
             );
-
+            //when the order is done
             orderDone.setOnMouseClicked(mouseEvent -> {
                 OrderDb.validOrder(order);
                 orderList.remove(order);
@@ -89,11 +90,12 @@ public class OrderController implements Initializable {
                 Label tableLabelDone = new Label("Table " + Document.parse(table).get("number"));
                 Label tableEmplacementLabelDone = new Label("  Salle : " + Document.parse(table).get("emplacement"));
                 Label dishesLabelDone = new Label("  Plats :" + order.getDishesId().size());
-
+                //display the order in the done orders
                 if (ordersDone.getChildren().size() == 5){
                     ordersDone.getChildren().remove(0);
                 }
 
+                //display the order in the done orders
                 ordersDone.getChildren().addAll(
                         new HBox(
                         tableLabelDone,
@@ -106,7 +108,7 @@ public class OrderController implements Initializable {
 
                 DishDb.getDishesPrice(order.getDishesId());
             });
-
+            //when the order is cancelled remove it from the list and the database
             orderCancel.setOnMouseClicked(mouseEvent -> {
                 orderList.remove(order);
                 orderListBox.getChildren().remove(hboxOrder);
@@ -115,6 +117,7 @@ public class OrderController implements Initializable {
         });
     }
 
+    //start the service and the timer
     public void startService() {
         btnStart.setVisible(false);
         service.setVisible(true);

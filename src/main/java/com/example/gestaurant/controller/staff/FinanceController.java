@@ -23,6 +23,7 @@ public class FinanceController implements Initializable {
     @FXML
     private TextField accesPath;
 
+    //initialize the label with the total cost and the total gain
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         labelSpent.setText(String.valueOf(Service.getTotalGain()));
@@ -32,6 +33,7 @@ public class FinanceController implements Initializable {
 
 
 
+    //generate and create a pdf with the total cost and the total gain
     public void GetPdf(){
         String path = accesPath.getText();
         try {

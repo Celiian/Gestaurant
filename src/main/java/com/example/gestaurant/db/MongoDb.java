@@ -18,6 +18,7 @@ public class MongoDb {
     public static MongoDatabase database;
     public static String url;
 
+    //  initialisation of the database connection with the url in the properties file
     public static void initiateDb() {
         try (InputStream input = new FileInputStream(".properties")) {
 
