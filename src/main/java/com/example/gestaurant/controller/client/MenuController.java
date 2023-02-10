@@ -54,7 +54,7 @@ public class MenuController implements Initializable {
             float price = (float) variable / 100;
             ArrayList<String> ingredientList = (ArrayList<String>) dish.get("ingredients");
             String ingredients = ingredientList.stream().map(Object::toString).collect(Collectors.joining(", "));
-            if (!Objects.equals(dish.get("status"), "out of stock") && !Objects.equals(dish.get("status"), "coming soon")) {
+            if (!Objects.equals(dish.get("status"), "coming soon")) {
                 HBox hbox = new HBox();
                 Label labelId = new Label(dish.get("_id").toString());
                 labelId.setVisible(false);
@@ -80,52 +80,56 @@ public class MenuController implements Initializable {
                 hbox.getChildren().addAll(
                         image,
                         hboxInside
-
-
                 );
                 hbox.setMinWidth(600);
 
-                buttonAdd.setOnMouseClicked(event -> {
+                if (Objects.equals(dish.get("status"), "out of stock")) {
+                    hboxInside.setDisable(true);
+                    buttonAdd.setText("Out of stock");
+                }
+                else {
 
-                    HBox hboxCart = new HBox();
+                    buttonAdd.setOnMouseClicked(event -> {
 
-                    Label labelNameCart = new Label(labelName.getText());
-                    Label labelIngredientsCart = new Label(labelIngredients.getText());
-                    Label labelPriceCart = new Label(labelPrice.getText());
-                    Label labelIdCart = new Label(labelId.getText());
-                    labelIdCart.setVisible(false);
-                    Button buttonDelete = new Button("Retirer");
+                        HBox hboxCart = new HBox();
 
-                    labelNameCart.setMinWidth(100);
-                    labelIngredientsCart.setMinWidth(130);
-                    labelPriceCart.setMinWidth(70);
-                    labelIdCart.setMaxWidth(1);
+                        Label labelNameCart = new Label(labelName.getText());
+                        Label labelIngredientsCart = new Label(labelIngredients.getText());
+                        Label labelPriceCart = new Label(labelPrice.getText());
+                        Label labelIdCart = new Label(labelId.getText());
+                        labelIdCart.setVisible(false);
+                        Button buttonDelete = new Button("Retirer");
 
-                    hboxCart.getChildren().addAll(
-                            new VBox(labelNameCart,
-                                    labelIngredientsCart
-                            ),
-                            new VBox(
-                                    labelPriceCart,
-                                    buttonDelete,
-                                    labelIdCart)
-                    );
+                        labelNameCart.setMinWidth(100);
+                        labelIngredientsCart.setMinWidth(130);
+                        labelPriceCart.setMinWidth(70);
+                        labelIdCart.setMaxWidth(1);
 
-                    dishCart.getChildren().add(hboxCart);
+                        hboxCart.getChildren().addAll(
+                                new VBox(labelNameCart,
+                                        labelIngredientsCart
+                                ),
+                                new VBox(
+                                        labelPriceCart,
+                                        buttonDelete,
+                                        labelIdCart)
+                        );
 
-                    totalPrice += price;
-                    totalAmount.setText("TOTAL   -----------------   " + totalPrice +" €");
-                    OrderClient.addToDishesList(labelIdCart.getText());
+                        dishCart.getChildren().add(hboxCart);
 
-                    buttonDelete.setOnMouseClicked(eventDelete -> {
-                        dishCart.getChildren().remove(hboxCart);
-                        totalPrice -= price;
-                        totalAmount.setText("TOTAL   -----------------   " + totalPrice +" €");
-                        OrderClient.removeFromList(labelIdCart.getText());
+                        totalPrice += price;
+                        totalAmount.setText("TOTAL   -----------------   " + totalPrice + " €");
+                        OrderClient.addToDishesList(labelIdCart.getText());
 
+                        buttonDelete.setOnMouseClicked(eventDelete -> {
+                            dishCart.getChildren().remove(hboxCart);
+                            totalPrice -= price;
+                            totalAmount.setText("TOTAL   -----------------   " + totalPrice + " €");
+                            OrderClient.removeFromList(labelIdCart.getText());
+
+                        });
                     });
-                });
-
+                }
                 try {
                     menuBox.getChildren().addAll(
                             hbox
