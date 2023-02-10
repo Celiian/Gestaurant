@@ -1,9 +1,8 @@
 package com.example.gestaurant.controller.client;
 
 import com.example.gestaurant.db.TableDb;
-import com.example.gestaurant.models.Order;
 import com.example.gestaurant.models.OrderClient;
-import com.example.gestaurant.models.Table;
+import com.example.gestaurant.models.TableGestaurant;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -36,17 +35,17 @@ public class TableController implements Initializable {
     private Label labelNb;
     @FXML
     private Label labelName;
-    private static List<Table> tableList = new ArrayList<>();
+    private static List<TableGestaurant> tableList = new ArrayList<>();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         List<String> stringTableList = TableDb.getTables();
         stringTableList.stream().map(Document::parse).forEach(table -> {
-            tableList.add(new Table((Integer) table.get("number"), (String) table.get("image"), (Integer) table.get("size"), (String) table.get("emplacement"), table.get("_id").toString()));
+            tableList.add(new TableGestaurant((Integer) table.get("number"), (String) table.get("image"), (Integer) table.get("size"), (String) table.get("emplacement"), table.get("_id").toString()));
         });
         emplacementChoice.setValue("Ou voulez vous manger ?");
 
-        tableList.stream().map(Table::getLocation).distinct().toList().forEach(emplacement -> {
+        tableList.stream().map(TableGestaurant::getLocation).distinct().toList().forEach(emplacement -> {
             try {
                 emplacementChoice.getItems().add(
                         emplacement
@@ -67,10 +66,10 @@ public class TableController implements Initializable {
                 int customerNumber = Integer.parseInt(fieldNumberCustomer.getText());
                 String customerName = fieldNameCustomer.getText();
                 String emplacement = (String) emplacementChoice.getValue();
-                List<Table> validTableList = tableList.stream()
+                List<TableGestaurant> validTableList = tableList.stream()
                         .filter(table -> table.getSize() >= customerNumber
                                 && Objects.equals(table.getLocation(), emplacement))
-                        .sorted(Comparator.comparing(Table::getSize)).toList();
+                        .sorted(Comparator.comparing(TableGestaurant::getSize)).toList();
                 OrderClient.setTable(validTableList.get(0).getNumber());
                 OrderClient.setTableId(tableList.get(0).getId());
                 OrderClient.setName(customerName);
