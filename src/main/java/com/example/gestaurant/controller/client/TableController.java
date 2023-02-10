@@ -74,20 +74,25 @@ public class TableController implements Initializable {
                         .filter(table -> table.getSize() >= customerNumber
                                 && Objects.equals(table.getLocation(), emplacement) && Objects.equals(table.getCustomer(), "empty"))
                         .sorted(Comparator.comparing(Table::getSize)).toList();
-                OrderClient.setTable(validTableList.get(0).getNumber());
-                OrderClient.setTableId(tableList.get(0).getId());
-                OrderClient.setName(customerName);
+                if (validTableList.size() == 0){
+                    labelReserved.setText("Nous sommes désolés, nous n'avons aucune table disponible dans cette salle");
+                }
+                else {
+                    OrderClient.setTable(validTableList.get(0).getNumber());
+                    OrderClient.setTableId(tableList.get(0).getId());
+                    OrderClient.setName(customerName);
 
-                fieldNameCustomer.setVisible(false);
-                fieldNumberCustomer.setVisible(false);
-                emplacementChoice.setVisible(false);
-                tableSearch.setVisible(false);
-                labelNb.setVisible(false);
-                labelName.setVisible(false);
+                    fieldNameCustomer.setVisible(false);
+                    fieldNumberCustomer.setVisible(false);
+                    emplacementChoice.setVisible(false);
+                    tableSearch.setVisible(false);
+                    labelNb.setVisible(false);
+                    labelName.setVisible(false);
 
-                TableDb.JoinLeaveTable(validTableList.get(0).getId(), false);
-                labelReserved.setText("Vous avez réservé la table " + OrderClient.getTable());
-                leaveBtn.setVisible(true);
+                    TableDb.JoinLeaveTable(validTableList.get(0).getId(), false);
+                    labelReserved.setText("Vous avez réservé la table " + OrderClient.getTable());
+                    leaveBtn.setVisible(true);
+                }
             } catch (Exception e) {
                 System.out.println(e);
                 errorLabel.setVisible(true);
