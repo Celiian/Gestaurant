@@ -20,7 +20,6 @@ public class HomeController implements Initializable {
     private VBox tablePage;
 
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         clear();

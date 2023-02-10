@@ -1,15 +1,15 @@
 package com.example.gestaurant.controller.client;
 
 import com.example.gestaurant.db.DishDb;
-import com.example.gestaurant.models.Order;
 import com.example.gestaurant.models.OrderClient;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import org.bson.Document;
 
@@ -94,16 +94,16 @@ public class MenuController implements Initializable {
 
                     totalPrice += price;
                     totalAmount.setText("TOTAL   -----------------   " + totalPrice +" €");
-
-
+                    OrderClient.addToDishesList(labelIdCart.getText());
 
                     buttonDelete.setOnMouseClicked(eventDelete -> {
                         dishCart.getChildren().remove(hboxCart);
                         totalPrice -= price;
                         totalAmount.setText("TOTAL   -----------------   " + totalPrice +" €");
+                        OrderClient.removeFromList(labelIdCart.getText());
+
                     });
                 });
-
 
                 try {
                     menuBox.getChildren().addAll(
@@ -114,5 +114,9 @@ public class MenuController implements Initializable {
                 }
             }
         });
+    }
+
+    public void orderDishes(){
+        System.out.println(OrderClient.getDishesListId());
     }
 }
