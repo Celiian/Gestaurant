@@ -100,9 +100,14 @@ public class MenuController implements Initializable {
                         labelIdCart.setVisible(false);
                         Button buttonDelete = new Button("Retirer");
 
-                        labelNameCart.setMinWidth(100);
-                        labelIngredientsCart.setMinWidth(130);
+                        labelNameCart.setMinWidth(90);
+                        labelIngredientsCart.setMinWidth(110);
                         labelPriceCart.setMinWidth(70);
+
+                        labelNameCart.setMaxWidth(90);
+                        labelIngredientsCart.setMaxWidth(110);
+                        labelPriceCart.setMaxWidth(70);
+
                         labelIdCart.setMaxWidth(1);
 
                         hboxCart.getChildren().addAll(

@@ -1,5 +1,6 @@
 package com.example.gestaurant.controller;
 
+import com.example.gestaurant.db.StatusDb;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
