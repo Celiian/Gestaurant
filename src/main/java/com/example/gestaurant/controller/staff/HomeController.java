@@ -1,4 +1,4 @@
-package com.example.gestaurant.controller.client;
+package com.example.gestaurant.controller.staff;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -7,18 +7,14 @@ import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.concurrent.TimeUnit;
 
 public class HomeController implements Initializable {
 
     @FXML
-    private VBox boxGlobalClient;
+    private VBox boxGlobalStaff;
 
     @FXML
-    private VBox menuPage;
-
-    @FXML
-    private VBox tablePage;
+    private VBox orderPage;
 
 
     @Override
@@ -26,21 +22,20 @@ public class HomeController implements Initializable {
         clear();
     }
 
-    public void dishPage(){
+    public void staffPage(){
         clear();
-        boxGlobalClient.getChildren().addAll(menuPage);
     }
 
 
-    public void tablePage(){
+    public void orderPage(){
         clear();
-        boxGlobalClient.getChildren().addAll(tablePage);
+        boxGlobalStaff.getChildren().add(orderPage);
+
     }
 
 
     public void clear(){
-        boxGlobalClient.getChildren().removeAll(menuPage);
-        boxGlobalClient.getChildren().removeAll(tablePage);
+        boxGlobalStaff.getChildren().remove(orderPage);
     }
 
 

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestaurant.controller.staff.HomeController">
+   <children>
+      <SplitPane dividerPositions="0.8012249443207127" prefHeight="600.0" prefWidth="900.0">
+         <items>
+            <VBox fx:id="boxGlobalStaff" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <VBox fx:id="orderPage" prefHeight="600.0" prefWidth="700.0">
+                     <children>
+                        <fx:include source="orders.fxml" />
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+            <AnchorPane prefHeight="600.0" prefWidth="900.0">
+               <children>
+                  <Label alignment="CENTER" layoutX="51.0" layoutY="17.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Navigation" textAlignment="CENTER" wrapText="false">
+                     <font>
+                        <Font size="18.0" fx:id="x1" />
+                     </font>
+                     <textFill>
+                        <Color red="0.624" green="0.624" blue="0.624" fx:id="x2" />
+                     </textFill>
+                  </Label>
+                  <Button layoutX="52.0" layoutY="73.0" mnemonicParsing="false" onAction="#orderPage" text="Order List" />
+                  <Button layoutX="29.0" layoutY="124.0" mnemonicParsing="false" onAction="#staffPage" text="Staff Management" />
+                  <Button layoutX="58.0" layoutY="192.0" mnemonicParsing="false" onAction="#quit" text="Quitter" />
+                  <Line endX="120.0" layoutX="55.0" layoutY="273.0" startX="-60.0" />
+                  <Label alignment="CENTER" layoutX="54.0" layoutY="288.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Contact" textAlignment="CENTER" wrapText="false">
+                     <font>
+                        <Font size="18.0" fx:id="x13" />
+                     </font>
+                     <textFill>
+                        <Color red="0.624" green="0.624" blue="0.624" fx:id="x21" />
+                     </textFill>
+                  </Label>
+                  <Label layoutX="30.0" layoutY="371.0" text="Da Quokiyet">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="14.0" layoutY="434.0" minWidth="60.0" prefHeight="23.0" prefWidth="140.0" style="&#10;" text="3 Rue Armand Moisant, " textAlignment="CENTER" wrapText="false">
+                     <font>
+                        <Font size="14.0" fx:id="x11" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="11.0" layoutY="459.0" minWidth="60.0" prefHeight="23.0" prefWidth="140.0" style="&#10;" text=" 75015 Paris" textAlignment="CENTER" wrapText="false">
+                     <font>
+                        <Font size="14.0" fx:id="x111" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="40.0" layoutY="414.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="0155655657" textAlignment="CENTER" wrapText="false">
+                     <font>
+                        <Font size="14.0" fx:id="x12" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+   </children>
+</VBox>
