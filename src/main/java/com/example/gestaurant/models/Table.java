@@ -9,18 +9,16 @@ public class Table {
     private int size;
     private String location;
     private String customer;
-
-
     private String id;
 
-    public Table(int number, String picture, int size, String location, String id) {
+    public Table(int number, String picture, int size, String location, String id, String customer) {
 
         this.number = number;
         this.picture = picture;
         this.size = size;
         this.location = location;
-
         this.id = id;
+        this.customer = customer;
     }
 
 

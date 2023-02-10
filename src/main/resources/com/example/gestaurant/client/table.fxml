@@ -30,6 +30,7 @@
                         <TextField fx:id="fieldNameCustomer" layoutX="212.0" layoutY="127.0" />
                         <Label fx:id="labelName" layoutX="14.0" layoutY="131.0" prefHeight="18.0" prefWidth="198.0" text="Pour quel nom reservez vous ?" />
                         <Label fx:id="labelReserved" layoutX="90.0" layoutY="275.0" prefHeight="18.0" prefWidth="198.0" />
+                        <Button fx:id="leaveBtn" layoutX="444.0" layoutY="307.0" mnemonicParsing="false" onAction="#leave" text="Quitter La table" visible="false" />
                      </children>
                   </AnchorPane>
                </content>
