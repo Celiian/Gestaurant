@@ -1,5 +1,6 @@
 package com.example.gestaurant.models;
 
+
 import org.bson.Document;
 
 public class Table {
@@ -9,13 +10,16 @@ public class Table {
     private String location;
     private String customer;
 
+
     private String id;
 
     public Table(int number, String picture, int size, String location, String id) {
+
         this.number = number;
         this.picture = picture;
         this.size = size;
         this.location = location;
+
         this.id = id;
     }
 
@@ -26,6 +30,7 @@ public class Table {
 
     public void setId(String id) {
         this.id = id;
+
     }
 
     public int getNumber() {
