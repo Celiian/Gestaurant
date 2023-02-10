@@ -2,6 +2,7 @@ package com.example.gestaurant.controller.client;
 
 import com.example.gestaurant.db.DishDb;
 import com.example.gestaurant.db.OrderDb;
+import com.example.gestaurant.db.StatusDb;
 import com.example.gestaurant.models.Order;
 import com.example.gestaurant.models.OrderClient;
 import javafx.fxml.FXML;
@@ -37,6 +38,10 @@ public class MenuController implements Initializable {
 
     @FXML
     private Label errorOrder;
+
+    @FXML
+    private Label errorOpen;
+
 
     private float totalPrice = 0;
 
@@ -133,17 +138,17 @@ public class MenuController implements Initializable {
     }
 
     public void orderDishes(){
-
-
-
-        if (OrderClient.getTableId() != null){
-            errorOrder.setVisible(false);
-            Order order = new Order(OrderClient.getTableId(), OrderClient.getDishesListId(), totalPrice, OrderClient.getName());
-            OrderDb.addOrder(order);
+        if(StatusDb.getStatus()) {
+            if (OrderClient.getTableId() != null) {
+                errorOrder.setVisible(false);
+                Order order = new Order(OrderClient.getTableId(), OrderClient.getDishesListId(), totalPrice, OrderClient.getName());
+                OrderDb.addOrder(order);
+            } else {
+                errorOrder.setVisible(true);
+            }
         }
         else {
-            errorOrder.setVisible(true);
+            errorOpen.setVisible(true);
         }
-
     }
 }

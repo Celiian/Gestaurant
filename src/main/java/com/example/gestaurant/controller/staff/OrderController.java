@@ -1,6 +1,7 @@
 package com.example.gestaurant.controller.staff;
 
 import com.example.gestaurant.db.OrderDb;
+import com.example.gestaurant.db.StatusDb;
 import com.example.gestaurant.db.TableDb;
 import com.example.gestaurant.models.Order;
 import com.example.gestaurant.models.TimerThread;
@@ -102,7 +103,7 @@ public class OrderController implements Initializable {
     public void startService() {
         btnStart.setVisible(false);
         service.setVisible(true);
-
+        StatusDb.changeStatus(true);
         TimerThread timerThread = new TimerThread(timer);
         timerThread.start();
     }

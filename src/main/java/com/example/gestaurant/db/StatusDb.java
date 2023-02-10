@@ -8,22 +8,29 @@ import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Filters.or;
 
 public class StatusDb {
 
-    public static List<String> getStatus() {
+    public static boolean getStatus() {
         try (MongoClient mongoClient = MongoClients.create(MongoDb.url)) {
             MongoDb.database = mongoClient.getDatabase("gestaurant");
             Document collectionOrders= MongoDb.database.getCollection("Status").find().first();
-            boolean b = Boolean.parseBoolean((String) collectionOrders.get("open"));
-            return b;
+            return (boolean) collectionOrders.get("open");
         }
+    }
 
+    public static void changeStatus(boolean status) {
+        try (MongoClient mongoClient = MongoClients.create(MongoDb.url)) {
+            MongoDb.database = mongoClient.getDatabase("gestaurant");
+            Document collectionOrders= MongoDb.database.getCollection("Status").find().first();
+            boolean open = (boolean) collectionOrders.get("open");
+
+            Bson filter = Filters.eq("open", open);
+            Document document = new Document("open", status);
+            MongoDb.database.getCollection("Status").replaceOne(filter, document);
+        }
     }
 
 }

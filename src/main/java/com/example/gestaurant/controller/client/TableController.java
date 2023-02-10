@@ -1,5 +1,6 @@
 package com.example.gestaurant.controller.client;
 
+import com.example.gestaurant.db.StatusDb;
 import com.example.gestaurant.db.TableDb;
 import com.example.gestaurant.models.Order;
 import com.example.gestaurant.models.OrderClient;
