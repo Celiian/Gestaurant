@@ -70,7 +70,7 @@
                   </Label>
                   <Button layoutX="41.0" layoutY="70.0" mnemonicParsing="false" onAction="#dishPage" text="Voir notre menu" />
                   <Button layoutX="39.0" layoutY="124.0" mnemonicParsing="false" onAction="#tablePage" text="Choisir une table" />
-                  <Button layoutX="63.0" layoutY="192.0" mnemonicParsing="false" text="Quitter" />
+                  <Button layoutX="63.0" layoutY="192.0" mnemonicParsing="false" onAction="#quit" text="Quitter" />
                   <Line endX="120.0" layoutX="55.0" layoutY="273.0" startX="-60.0" />
                   <Label alignment="CENTER" layoutX="54.0" layoutY="288.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Contact" textAlignment="CENTER" wrapText="false">
                      <font>

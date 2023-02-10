@@ -28,13 +28,14 @@ public class TableController implements Initializable {
 
     @FXML
     private Label errorLabel;
-
     @FXML
     private Label labelReserved;
-
     @FXML
     private Button searchTable;
-
+    @FXML
+    private Label labelNb;
+    @FXML
+    private Label labelName;
     private static List<Table> tableList = new ArrayList<>();
 
     @Override
@@ -56,12 +57,11 @@ public class TableController implements Initializable {
         });
 
 
-
     }
 
-    public void searchTable(){
+    public void searchTable() {
 
-        if (fieldNumberCustomer.getText() != null || fieldNameCustomer.getText() != null){
+        if (fieldNumberCustomer.getText() != null || fieldNameCustomer.getText() != null) {
             try {
                 errorLabel.setVisible(false);
                 int customerNumber = Integer.parseInt(fieldNumberCustomer.getText());
@@ -79,10 +79,10 @@ public class TableController implements Initializable {
                 fieldNumberCustomer.setVisible(false);
                 emplacementChoice.setVisible(false);
                 searchTable.setVisible(false);
+                labelNb.setVisible(false);
+                labelName.setVisible(false);
                 labelReserved.setText("Vous avez réservé la table " + OrderClient.getTable());
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 System.out.println(e);
                 errorLabel.setVisible(true);
             }

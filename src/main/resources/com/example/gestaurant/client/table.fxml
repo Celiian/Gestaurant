@@ -18,17 +18,17 @@
                <content>
                   <AnchorPane id="Content" minHeight="600.0" minWidth="-1.0" prefHeight="600.0" prefWidth="717.0">
                      <children>
-                        <Label layoutX="20.0" layoutY="73.0" prefHeight="18.0" prefWidth="134.0" text="Combien êtes-vous ?" />
+                        <Label fx:id="labelNb" layoutX="20.0" layoutY="73.0" prefHeight="18.0" prefWidth="134.0" text="Combien êtes-vous ?" />
                         <ChoiceBox fx:id="emplacementChoice" layoutX="331.0" layoutY="69.0" prefHeight="27.0" prefWidth="182.0" />
                         <TextField fx:id="fieldNumberCustomer" layoutX="161.0" layoutY="69.0" />
-                        <Button fx:id="searchTable" layoutX="532.0" layoutY="67.0" mnemonicParsing="false" onAction="#searchTable" text="Chercher" />
+                        <Button layoutX="532.0" layoutY="67.0" mnemonicParsing="false" onAction="#searchTable" text="Chercher" />
                         <Label fx:id="errorLabel" layoutX="164.0" layoutY="98.0" prefHeight="18.0" prefWidth="147.0" text="Veuillez entrer un nombre valide " textFill="RED" visible="false">
                            <font>
                               <Font size="10.0" />
                            </font>
                         </Label>
                         <TextField fx:id="fieldNameCustomer" layoutX="212.0" layoutY="127.0" />
-                        <Label layoutX="14.0" layoutY="131.0" prefHeight="18.0" prefWidth="198.0" text="Pour quel nom reservez vous ?" />
+                        <Label fx:id="labelName" layoutX="14.0" layoutY="131.0" prefHeight="18.0" prefWidth="198.0" text="Pour quel nom reservez vous ?" />
                         <Label fx:id="labelReserved" layoutX="90.0" layoutY="275.0" prefHeight="18.0" prefWidth="198.0" />
                      </children>
                   </AnchorPane>
