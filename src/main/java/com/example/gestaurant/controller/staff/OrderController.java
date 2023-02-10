@@ -1,5 +1,6 @@
 package com.example.gestaurant.controller.staff;
 
+import com.example.gestaurant.db.DishDb;
 import com.example.gestaurant.db.OrderDb;
 import com.example.gestaurant.db.TableDb;
 import com.example.gestaurant.models.Order;
@@ -66,6 +67,7 @@ public class OrderController implements Initializable {
                 OrderDb.validOrder(order);
                 orderList.remove(order);
                 orderListBox.getChildren().remove(hboxOrder);
+                DishDb.getDishesPrice(order.getDishesId());
             });
 
             orderCancel.setOnMouseClicked(mouseEvent -> {
