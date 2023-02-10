@@ -22,12 +22,12 @@
                   </VBox>
                   <VBox fx:id="financePage" prefHeight="600.0" prefWidth="700.0">
                      <children>
-                        <fx:include source="../client/finance.fxml" />
+                        <fx:include source="finance.fxml" />
                      </children>
                   </VBox>
-                  <VBox fx:id="employeePage" prefHeight="200.0" prefWidth="100.0">
+                  <VBox fx:id="employeePage" prefHeight="600.0" prefWidth="700.0">
                      <children>
-                        <fx:include source="Employee.fxml" />
+                        <fx:include source="employee.fxml" />
                      </children>
                   </VBox>
                </children>

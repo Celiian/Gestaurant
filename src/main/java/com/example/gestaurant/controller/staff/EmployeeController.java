@@ -50,7 +50,7 @@ public class EmployeeController implements Initializable {
 
             delete.setOnMouseClicked(mouseEvent -> {
                 employeeCard.getChildren().remove(hbox);
-                EmployeeDb.deleteEmployee((String) employee.get("_id"));
+                EmployeeDb.deleteEmployee(employee.get("_id").toString());
             });
         });
         }

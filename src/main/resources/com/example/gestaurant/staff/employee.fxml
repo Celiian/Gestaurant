@@ -7,13 +7,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestaurant.controller.staff.EmployeeController">
+<VBox prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestaurant.controller.staff.EmployeeController">
    <children>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="602.0" prefWidth="902.0" style="-fx-background-color: #747475;">
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="602.0" prefWidth="700.0" style="-fx-background-color: #747475;">
          <children>
-            <ScrollPane layoutX="469.0" layoutY="12.0" prefHeight="574.0" prefWidth="402.0">
+            <ScrollPane layoutX="335.0" layoutY="15.0" prefHeight="571.0" prefWidth="353.0">
                <content>
-                  <VBox fx:id="employeeCard" maxHeight="1.7976931348623157E308" prefHeight="570.0" prefWidth="400.0" />
+                  <VBox fx:id="employeeCard" maxHeight="1.7976931348623157E308" prefHeight="567.0" prefWidth="344.0" />
                </content>
             </ScrollPane>
             <AnchorPane layoutX="8.0" layoutY="-5.0" prefHeight="570.0" prefWidth="438.0">
