@@ -134,6 +134,8 @@ public class MenuController implements Initializable {
 
     public void orderDishes(){
 
+
+
         if (OrderClient.getTableId() != null){
             errorOrder.setVisible(false);
             Order order = new Order(OrderClient.getTableId(), OrderClient.getDishesListId(), totalPrice, OrderClient.getName());
